@@ -7,4 +7,7 @@ Experimenting with canvas, kinetic.js
 the goal is to develop some kind of math game at the end.
 then hopefully convert it to mobile.
 
+Updates:
+2012Oct19 - fixed timer problem on multiple button clicks.
+
 

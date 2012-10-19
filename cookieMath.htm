@@ -3,7 +3,7 @@
 <html class="no-js">
 <head>
     <script src="jquery-1.8.2.min.js" type="text/javascript"></script>
-    <script src="kinetic-v4.0.2.js" type="text/javascript"></script>
+    <script src="kinetic-v4.0.3.js" type="text/javascript"></script>
     <title></title>
     <style>
        
@@ -40,8 +40,12 @@
         var stage;
         var mathProblemLayer;
         var mathProblemLayer2;
+        var comments = generateText("", 200, 100, "blue", 30, "bold", 400);
+        
+        
         var calcBtn;
         var snackLayer  = new Kinetic.Layer();
+        
 
         var mathObj = {
             x: 430,
@@ -74,6 +78,14 @@
            setInterval(function () {
                 checkInJar();
             }, 16);  
+            
+           
+          
+           mathProblemLayer2 = new Kinetic.Layer();
+           
+           mathProblemLayer2.add(comments);
+          
+           stage.add(mathProblemLayer2); 
         }
 
         function setAnswerArea() {
@@ -231,29 +243,38 @@
             var userAnswer = $("#txtAnswer").val();
 
              if (mathObj.answer == userAnswer) {
-                txtMathProblem = generateText("Yay", 200, 100, "blue", 30, "bold", 400);
+               comments.setText("Hey");
+               comments.setOpacity(.5);
+               stage.draw();
                 for (var s = 1; s < snackArray.length; s++) {
                 	snackArray[s].setDraggable(true);
                 }
+                
+               
              }
             else {
-                txtMathProblem = generateText("sorry", 200, 100, "blue", 30, "bold", 400);
-            }
-            mathProblemLayer2 = new Kinetic.Layer();
-            mathProblemLayer2.add(txtMathProblem);
-            stage.add(mathProblemLayer2); 
-
-            setTimeout(function () {
-               mathProblemLayer2.remove();
-            }, 1000);  
-
-           //  clearInterval(timeOut);
+            	 comments.setText("ddsfsdf");
+                 stage.draw();
+              }
+            
+          var timer = setTimeout(function () {
+      		  	comments.setText("");
+    				stage.draw();
+                  }, 1000); 
+      	  clearTimeOut(timer);
+            
         } 
 
-
-        /* function clearMessage() {
-            mathProblemLayer2.remove();
-         } */
+        function startTimer(){
+        
+     	 timer = setTimeout(function () {
+     		  	comments.setText("");
+     		  	stage.draw();
+                 }, 1000); 
+     	  clearTimeOut(timer);
+     	  
+        }
+     	   
 
         function generateText(txtStr, dx, dy, fColor, fSize, fStyle, fWidth) {
             return new Kinetic.Text({
@@ -292,7 +313,7 @@
             
             $("#btnCalc").click(function() {
             	checkAnswer();
-            }); 
+            });  
         });
     </script>
 </head>
