@@ -39,15 +39,14 @@
 
         var stage;
         var mathProblemLayer;
-        var mathProblemLayer2;
-        var comments = generateText("", 200, 100, "blue", 30, "bold", 400);
+        var commentLayer;
+        var comments;
         
         
         var calcBtn;
         var snackLayer  = new Kinetic.Layer();
         
-
-        var mathObj = {
+		 var mathObj = {
             x: 430,
             y: 60,
             ops     : "",
@@ -68,24 +67,17 @@
                 container: "canvasContainer"
             });
 
-            
            doBackground();
+           
            setjar();
            setAnswerArea();
-	
+          
             doMath();
             // this is for later
            setInterval(function () {
                 checkInJar();
             }, 16);  
-            
-           
-          
-           mathProblemLayer2 = new Kinetic.Layer();
-           
-           mathProblemLayer2.add(comments);
-          
-           stage.add(mathProblemLayer2); 
+            setCommentBox();
         }
 
         function setAnswerArea() {
@@ -149,6 +141,15 @@
             stage.add(new Kinetic.Layer().add(jar));
         }
 
+        function setCommentBox(){
+        	comments = generateText("", 200, 100, "blue", 30, "bold", 400);
+        	
+            commentLayer = new Kinetic.Layer();
+            commentLayer.add(comments);
+            //comments.setZIndex(5);
+            stage.add(commentLayer); 
+        }
+        
         function doBackground() {
             var bg = new Kinetic.Rect({
                 height: 500,
@@ -160,22 +161,25 @@
             var bgLayer = new Kinetic.Layer();
             bgLayer.add(bg);
             stage.add(bgLayer);
+            
+           
         }
 
         function checkInJar() {
-       	  var txtAns = document.getElementById("txtAnswer");
        	 
-            for (var s = 1; s < snackArray.length; s++) {
-            	
-                if (snackArray[s].getX() < 262 && snackArray[s].getX() > 200 && snackArray[s].getY() > 300 && snackArray[s].getY() < 382) {
-            	    snackArray[s].setStroke("red");
-                    snackArray[s].hide();
-                    
-                }
-                else {
-                    snackArray[s].setStroke("#cccccc");
-                }  
-            } 
+       	  if (mathObj.answer > 0){
+       		    for (var s = 1; s < snackArray.length; s++) {
+            	  if (snackArray[s].getX() < 262 && snackArray[s].getX() > 200 && snackArray[s].getY() > 300 && snackArray[s].getY() < 382) {
+	            	    // snackArray[s].setStroke("red");
+	                    snackArray[s].hide();
+	                    mathObj.answer--;
+	                }
+            	} 
+       	  }
+       	  else {
+       		  clearSnacks();
+       		  }
+       	  
         }
 
         function doMath() {
@@ -231,51 +235,42 @@
 
         }
 
-        /* function clearSnacks() {
+       function clearSnacks() {
             snackLayer.remove();
             mathProblemLayer.remove();
+            $("#txtAnswer").val("");
+            $("#btnCalc").removeAttr("disabled");
             doMath();
-        } */
+        }
 
+       
+       	
          function checkAnswer() {
-
             var txtMathProblem;
             var userAnswer = $("#txtAnswer").val();
 
              if (mathObj.answer == userAnswer) {
-               comments.setText("Hey");
-               comments.setOpacity(.5);
+            	 $("#btnCalc").attr("disabled", "disabled");
+               comments.setText("That's right");
                stage.draw();
                 for (var s = 1; s < snackArray.length; s++) {
                 	snackArray[s].setDraggable(true);
                 }
-                
-               
              }
             else {
-            	 comments.setText("ddsfsdf");
+            	 comments.setText("Sorry, try again");
                  stage.draw();
               }
             
           var timer = setTimeout(function () {
       		  	comments.setText("");
-    				stage.draw();
-                  }, 1000); 
+    			stage.draw();
+                 }, 1000); 
       	  clearTimeOut(timer);
-            
+           
         } 
 
-        function startTimer(){
-        
-     	 timer = setTimeout(function () {
-     		  	comments.setText("");
-     		  	stage.draw();
-                 }, 1000); 
-     	  clearTimeOut(timer);
-     	  
-        }
-     	   
-
+    
         function generateText(txtStr, dx, dy, fColor, fSize, fStyle, fWidth) {
             return new Kinetic.Text({
                 x: dx,
@@ -311,9 +306,9 @@
                 init();
             });
             
-            $("#btnCalc").click(function() {
+            /* $("#btnCalc").click(function() {
             	checkAnswer();
-            });  
+            });   */
         });
     </script>
 </head>
@@ -338,7 +333,7 @@
     <div class="hide" id="contentScreen">
     <div id="canvasContainer" style="border:1px solid red;width:800px;height:500px"></div>
       <input type="text" id="txtAnswer" class="absolute" value=""/>
-      <img src="btnCalc.png" class="absolute" id="btnCalc"/>
+      <input type="button" id="btnCalc" onclick="checkAnswer()" value="Calculate" class="absolute"/>
      </div>
 </body>
 </html>
