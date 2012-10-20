@@ -13,4 +13,5 @@ Updates:
 2012Oct19 	- fixed timer problem on multiple button clicks.
 			- added advance to next problem upon correctly solving and drag
 
-
+twitter: @ginhanlabs
+http://ginhanlabs.blogspot.com
