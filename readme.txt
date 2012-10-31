@@ -12,6 +12,7 @@ Updates:
 			- added numeric keypad instead of using text btn due to a problem with framwork bug tbd
 			- added sprite animation when drag to mouth of character
 			- added supporting images
+			- organized into folders
 
 twitter: @ginhanlabs
 http://ginhanlabs.blogspot.com
