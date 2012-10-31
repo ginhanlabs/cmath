@@ -8,10 +8,10 @@ the goal is to develop some kind of math game at the end.
 then hopefully convert it to mobile.
 
 Updates:
-2012Oct20	- added when finish dragging items, it will advance.
-			- fixed layering problem
-2012Oct19 	- fixed timer problem on multiple button clicks.
-			- added advance to next problem upon correctly solving and drag
+2012Oct30	- added next and clear
+			- added numeric keypad instead of using text btn due to a problem with framwork bug tbd
+			- added sprite animation when drag to mouth of character
+			- added supporting images
 
 twitter: @ginhanlabs
 http://ginhanlabs.blogspot.com
