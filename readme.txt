@@ -8,11 +8,8 @@ the goal is to develop some kind of math game at the end.
 then hopefully convert it to mobile.
 
 Updates:
-2012Oct30	- added next and clear
-			- added numeric keypad instead of using text btn due to a problem with framwork bug tbd
-			- added sprite animation when drag to mouth of character
-			- added supporting images
-			- organized into folders
+2012	- optimized image loading; cleaned up code
+		- added cookie reset if dragged incorrectly 
 
 twitter: @ginhanlabs
 http://ginhanlabs.blogspot.com
