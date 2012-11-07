@@ -8,7 +8,7 @@ the goal is to develop some kind of math game at the end.
 then hopefully convert it to mobile.
 
 Updates:
-2012	- optimized image loading; cleaned up code
+2012Nov5	- optimized image loading; cleaned up code
 		- added cookie reset if dragged incorrectly 
 
 twitter: @ginhanlabs
