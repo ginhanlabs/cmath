@@ -5,7 +5,7 @@
 <!-- Coded by: twitter @ginhanlabs -->
 <!-- Website: http://ginhanlabs.blogspot.com -->
  
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
     <script src="scripts/kinetic-v4.0.4.js" type="text/javascript"></script>
     <title>cmath</title>
     <style type="text/css">
@@ -18,9 +18,7 @@
          .menu a {border:1px solid red;padding:1em;display:block;width:5em;text-decoration:none;margin:auto;margin-bottom:.6em;}
          #btnCalc {left:545px;top:455px;}
          #keyPadRow{left:410px;top:340px;}
-         #btnMenu {left:120px;top:455px;}
          .numKeys {padding:.5em;margin-left:.2em}
-         
   	}
   	
     </style>
@@ -57,8 +55,8 @@
             eaten    : 0,
             controlBtnX : 415, controlBtnY : 395,
             nPress: "",
-            numClicks : 0, maxClicks : 10, // txtAnswer can't have more than 10 digit
-            Settings: ""
+            numClicks : 0, maxClicks : 10 // txtAnswer can't have more than 10 digit
+            
         }
         
        var imgSources = [
@@ -100,7 +98,7 @@
            setCharacter();
            SetJar();
            SetAnswerArea();
-         //  DoMath();
+           DoMath();
            SetFeedbackBox();
            stage.draw();
         }
@@ -189,7 +187,6 @@
                     tempImg = imgAssets.snackImage2;
                     amount2--;
                     snackName = "jarsnack" + z;
-                   
                 }
                 else {
                     tempImg = imgAssets.snackImage;
@@ -347,13 +344,9 @@
 	        txtMathProblem.setText("");
 	        txtAnswer.setText("");
             $("#btnCalc").removeAttr("disabled");
-           if (mathObj.Settings != "Reset"){
-            	DoMath();
-            	mathObj.Settings = "";
-           }; 
+            DoMath();
+            
         }
-        
-      
  
        function CheckInJar(snack) {
        	   var canEat = false;
@@ -386,7 +379,6 @@
                	 snackArray[s].on('mousedown',function(){
                	 	oX = this.getX();
                  	oY = this.getY();
-                 	
                	 })
                	
                  snackArray[s].on('dragend', function(){
@@ -456,20 +448,11 @@
         }
         function GenerateRandomNum() {
             // no zeros - redo for level 1?
-            return Math.round(Math.random() * (mathObj.level * 5) + 1 );
+            return Math.round(Math.random() * (mathObj.level * 3) + 1 );
         }
  
- 		function ShowMenu(){
- 			mathObj.Settings = "Reset";
- 			ClearSnacks();
- 			$("#contentScreen").addClass("hide");
- 			$(".mainMenu").removeClass("hide");
- 			 
-        }
- 		
         $(document).ready(function () {
         	LoadImages();
-        	Init();
         	$(".mainMenu a").click(function () {
                 mathObj.ops = $(this).attr("rel");
                 $(".mainMenu").addClass("hide");
@@ -481,8 +464,7 @@
                 $("h3").addClass("hide");
                 $(".levelSelect").addClass("hide");
                 $("#contentScreen").removeClass("hide");
-                DoMath();
-                // Init();
+                Init();
             });
           
         });
@@ -511,9 +493,7 @@
     <div id="canvasContainer" style="border:1px solid red;width:800px;height:500px:"></div>
     	<div id="keyPadRow" class="absolute" ></div>
       	<input type="button" id="btnCalc" onclick="CheckAnswer()" value="Calculate" class="absolute"/>
-      	<input type="button" id="btnMenu" value="Game Menu" class="absolute" onclick="ShowMenu()"/>
-     </div>
+      </div>
      <div id="imageHolder" class="hide absolute"></div>
-    
 </html>
 

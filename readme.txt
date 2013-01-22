@@ -8,7 +8,6 @@ the goal is to develop some kind of math game at the end.
 then hopefully convert it to mobile.
 
 Updates:
-2012Nov24   - added Back to main menu button, game reset
 2012Nov5	- optimized image loading; cleaned up code
 		- added cookie reset if dragged incorrectly 
 
